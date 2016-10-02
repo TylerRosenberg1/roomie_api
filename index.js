@@ -17,6 +17,7 @@ app.post("/user", userController.create); //DONE
 
 app.post("/roommate", roommateController.create);
 app.post("/roommate/update", roommateController.update)
+app.delete("/roommate/delete", roommateController.destroy)
 
 
 

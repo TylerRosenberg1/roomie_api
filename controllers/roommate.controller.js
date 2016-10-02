@@ -44,7 +44,23 @@ var roommateController = {
     })
   },
   destroy: function(req, res) {
-
+    User.findOneAndUpdate({
+      _id: "57f16436190a09099a1ddbde"
+    }, {$pull: {roommates: {_id: "57f1645c05ec06099ead3db6"}}}, function(err, res) {
+      if (err) {
+        console.log(err);
+      } else {
+        User.findOneAndUpdate({
+          _id: "57f1645c05ec06099ead3db6"
+        }, {$pull: {roommates: {_id: "57f16436190a09099a1ddbde"}}}, function(err, res) {
+          if (err) {
+            console.log(err);
+          } else {
+            console.log("COMPLETE");
+          }
+        })
+      }
+    })
   }
 }
 
