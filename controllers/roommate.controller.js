@@ -21,8 +21,30 @@ var roommateController = {
             })
           }
         })
-      });
+      })
     })
+  },
+  update: function(req, res) {
+    User.findOneAndUpdate({
+      _id: "57f16436190a09099a1ddbde", "roommates._id": "57f1645c05ec06099ead3db6"
+    }, {$set: {"roommates.$.status": "active"}}, function(err, res) {
+      if (err) {
+        console.log(err);
+      } else {
+        User.findOneAndUpdate({
+          _id: "57f1645c05ec06099ead3db6", "roommates._id": "57f16436190a09099a1ddbde"
+        }, {$set: {"roommates.$.status": "active"}}, function(err, res) {
+          if (err) {
+            console.log(err);
+          } else {
+            console.log("COMPLETE");
+          }
+        })
+      }
+    })
+  },
+  destroy: function(req, res) {
+
   }
 }
 

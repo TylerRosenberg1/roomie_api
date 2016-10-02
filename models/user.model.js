@@ -18,7 +18,7 @@ var UserSchema = new Schema({
     minlength: [6, "Password must be at least 6 characters"],
     maxlength: [17, "Password cannot exceed 17 characters"],
   },
-  roommates: [{roomate: {type: Schema.Types.ObjectId, ref: "User"}, status: {type: String, default: "pending"}}]
+  roommates: [{roommate: {type: Schema.Types.ObjectId, ref: "User"}, status: {type: String, default: "pending"}, requests: [{description: String, amount: Number}], balance: Number}]
 })
 
 UserSchema.plugin(uniqueValidator, { message: 'That username already exists. Please choose a new one' });
