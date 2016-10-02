@@ -10,7 +10,7 @@ var userController = {
       if (err) {
         console.log(err);
       } else {
-        console.log(user);
+        //Give JWT
       }
     })
   }

@@ -10,10 +10,12 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}))
 
 var userController = require("./controllers/user.controller");
+var roommateController = require("./controllers/roommate.controller");
 
 
 app.post("/user", userController.create); //DONE
 
+app.post("/roommate", roommateController.create);
 
 
 
