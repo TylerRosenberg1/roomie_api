@@ -14,6 +14,7 @@ var roommateController = require("./controllers/roommate.controller");
 
 
 app.post("/user", userController.create); //DONE
+app.get("/user/:id", userController.show); //DONE
 
 app.post("/roommate", roommateController.create);
 app.post("/roommate/update", roommateController.update)

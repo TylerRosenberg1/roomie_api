@@ -13,6 +13,19 @@ var userController = {
         //Give JWT
       }
     })
+  },
+  show: function(req, res) {
+    User.findOne({
+      _id: req.params.id
+    })
+    .populate({path: "roommates._id", model: "User"})
+    .exec(function(err, user) {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log(user.roommates)
+      }
+    })
   }
 }
 

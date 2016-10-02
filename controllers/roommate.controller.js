@@ -2,8 +2,8 @@ var User = require("../models/user.model");
 
 var roommateController = {
   create: function(req, res) {
-    User.findById("57f16436190a09099a1ddbde", function(err, user1) {
-      User.findById("57f1645c05ec06099ead3db6", function(err, user2) {
+    User.findById("57f19536ac8ebd0db6905243", function(err, user1) {
+      User.findById("57f19540ac8ebd0db6905244", function(err, user2) {
         User.update({
           _id: user1._id
         }, {$addToSet: {roommates: user2}}, function(err, res) {
@@ -26,13 +26,13 @@ var roommateController = {
   },
   update: function(req, res) {
     User.findOneAndUpdate({
-      _id: "57f16436190a09099a1ddbde", "roommates._id": "57f1645c05ec06099ead3db6"
+      _id: "57f19536ac8ebd0db6905243", "roommates._id": "57f19540ac8ebd0db6905244"
     }, {$set: {"roommates.$.status": "active"}}, function(err, res) {
       if (err) {
         console.log(err);
       } else {
         User.findOneAndUpdate({
-          _id: "57f1645c05ec06099ead3db6", "roommates._id": "57f16436190a09099a1ddbde"
+          _id: "57f19540ac8ebd0db6905244", "roommates._id": "57f19536ac8ebd0db6905243"
         }, {$set: {"roommates.$.status": "active"}}, function(err, res) {
           if (err) {
             console.log(err);
@@ -45,14 +45,14 @@ var roommateController = {
   },
   destroy: function(req, res) {
     User.findOneAndUpdate({
-      _id: "57f16436190a09099a1ddbde"
-    }, {$pull: {roommates: {_id: "57f1645c05ec06099ead3db6"}}}, function(err, res) {
+      _id: "57f19536ac8ebd0db6905243"
+    }, {$pull: {roommates: {_id: "57f19536ac8ebd0db6905243"}}}, function(err, res) {
       if (err) {
         console.log(err);
       } else {
         User.findOneAndUpdate({
-          _id: "57f1645c05ec06099ead3db6"
-        }, {$pull: {roommates: {_id: "57f16436190a09099a1ddbde"}}}, function(err, res) {
+          _id: "57f19536ac8ebd0db6905243"
+        }, {$pull: {roommates: {_id: "57f19536ac8ebd0db6905243"}}}, function(err, res) {
           if (err) {
             console.log(err);
           } else {
