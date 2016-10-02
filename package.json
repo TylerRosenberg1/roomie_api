@@ -16,5 +16,13 @@
   "bugs": {
     "url": "https://github.com/TylerRosenberg1/roomtrack_api/issues"
   },
-  "homepage": "https://github.com/TylerRosenberg1/roomtrack_api#readme"
+  "homepage": "https://github.com/TylerRosenberg1/roomtrack_api#readme",
+  "dependencies": {
+    "bcrypt": "^0.8.7",
+    "body-parser": "^1.15.2",
+    "cors": "^2.8.1",
+    "express": "^4.14.0",
+    "mongoose": "^4.6.2",
+    "validator": "^6.0.0"
+  }
 }
