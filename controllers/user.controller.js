@@ -18,12 +18,12 @@ var userController = {
     User.findOne({
       _id: req.params.id
     })
-    .populate({path: "roommates._id", model: "User"})
+    .populate({path: "roommates._id roommates.requests"})
     .exec(function(err, user) {
       if (err) {
         console.log(err);
       } else {
-        console.log(user.roommates)
+        res.json(user.roommates)
       }
     })
   }
