@@ -8,9 +8,9 @@ var userController = {
       password: req.body.password
     }, function(err, user) {
       if (err) {
-        console.log(err);
+        res.status(200).send(err)
       } else {
-        //Give JWT
+        res.json(user)
       }
     })
   },
@@ -23,7 +23,7 @@ var userController = {
       if (err) {
         console.log(err);
       } else {
-        res.json(user.roommates)
+        res.json(user);
       }
     })
   }

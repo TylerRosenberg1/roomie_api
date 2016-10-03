@@ -8,7 +8,7 @@ var requestController = {
       amount: req.body.amount
     }, function(err, request) {
       User.findOneAndUpdate({
-        _id: "57f19540ac8ebd0db6905244", "roommates._id": "57f19536ac8ebd0db6905243"
+        _id: req.body.requestRecieverId, "roommates._id": "57f2b51c76e62e11244162d2"
       }, {$addToSet: {"roommates.$.requests": request}}, function(err, res) {
         if (err) {
           console.log(err);
@@ -20,19 +20,19 @@ var requestController = {
   },
   update: function(req, res) {
     Request.findOneAndUpdate({
-      _id: "57f2a17a781ffd0f469b7ad4"
+      _id: req.params.id
     }, {$set: {status: "accepted"}}, function(err, request) {
       if (err) {
         console.log(err);
       } else {
         User.findOneAndUpdate({
-          _id: "57f19540ac8ebd0db6905244", "roommates._id": "57f19536ac8ebd0db6905243"
-        }, {$inc: {"roommates.$.balance": -request.amount}}, function(err, resp) {
+          _id: "57f2b59c76e62e11244162d3", "roommates._id": req.params.roommateId
+        }, {$inc: {"roommates.$.balance": -request.amount}, $pull: {"roommates.$.requests": req.params.id}}, function(err, resp) {
           if (err) {
             console.log(err);
           } else {
             User.findOneAndUpdate({
-              _id: "57f19536ac8ebd0db6905243", "roommates._id": "57f19540ac8ebd0db6905244"
+              _id: req.params.roommateId, "roommates._id": "57f2b59c76e62e11244162d3"
             }, {$inc: {"roommates.$.balance": request.amount}}, function(err, resp) {
               if (err) {
                 console.log(err);
@@ -47,13 +47,13 @@ var requestController = {
   },
   destroy: function(req, res) {
     User.findOneAndUpdate({
-      _id: "57f19540ac8ebd0db6905244", "roommates._id": "57f19536ac8ebd0db6905243"
-    }, {$pull: {"roommates.$.requests": "57f29b657725f10ed51b90ff" }}, function(err, res) {
+      _id: "57f2b51c76e62e11244162d2", "roommates._id": req.params.roommateId
+    }, {$pull: {"roommates.$.requests": req.params.id}}, function(err, res) {
       if (err) {
         console.log(err);
       } else {
         Request.remove({
-          _id: "57f29b657725f10ed51b90ff"
+          _id: req.params.id
         }, function(err, resp) {
           if (err) {
             console.log(err);
