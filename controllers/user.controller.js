@@ -26,6 +26,21 @@ var userController = {
         res.json(user);
       }
     })
+  },
+  search: function(req, res) {
+    User.findOne({
+      username: req.body.username
+    }, function(err, user) {
+      if (err) {
+        console.log(err);
+      } else {
+        if (!user) {
+          res.status(200).send({error: "Oops...No such user found. Please try again :)"})
+        } else {
+          res.json(user)
+        }
+      }
+    })
   }
 }
 
