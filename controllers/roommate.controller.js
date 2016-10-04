@@ -3,7 +3,7 @@ var User = require("../models/user.model");
 var roommateController = {
   index: function(req, res) {
     User.findOne({
-      _id: "57f2e637017c091a8de80445"
+      _id: req.user._id
     })
     .populate("roommates._id")
     .exec(function(err, user) {
@@ -11,7 +11,7 @@ var roommateController = {
     })
   },
   create: function(req, res) {
-    User.findById("57f2e637017c091a8de80445", function(err, user1) {
+    User.findById(req.user._id, function(err, user1) {
       User.findById(req.body.roommateId, function(err, user2) {
         User.update({
           _id: user1._id
@@ -25,7 +25,7 @@ var roommateController = {
               if (err) {
                 console.log(err);
               } else {
-                res.status(200).send();
+
               }
             })
           }
@@ -35,18 +35,18 @@ var roommateController = {
   },
   update: function(req, res) {
     User.findOneAndUpdate({
-      _id: "57f2e637017c091a8de80445", "roommates._id": req.params.requesterId
+      _id: req.user._id, "roommates._id": req.params.requesterId
     }, {$set: {"roommates.$.status": "active"}}, function(err, res) {
       if (err) {
         console.log(err);
       } else {
         User.findOneAndUpdate({
-          _id: req.params.requesterId, "roommates._id": "57f2e637017c091a8de80445"
+          _id: req.params.requesterId, "roommates._id": req.user._id
         }, {$set: {"roommates.$.status": "active"}}, function(err, res) {
           if (err) {
             console.log(err);
           } else {
-            res.status(200).send();
+
           }
         })
       }
@@ -54,18 +54,18 @@ var roommateController = {
   },
   destroy: function(req, res) {
     User.findOneAndUpdate({
-      _id: "57f2e637017c091a8de80445"
+      _id: req.user._id
     }, {$pull: {roommates: {_id: req.params.requesterId}}}, function(err, res) {
       if (err) {
         console.log(err);
       } else {
         User.findOneAndUpdate({
           _id: req.params.requesterId
-        }, {$pull: {roommates: {_id: "57f2e637017c091a8de80445"}}}, function(err, res) {
+        }, {$pull: {roommates: {_id: req.user._id}}}, function(err, res) {
           if (err) {
             console.log(err);
           } else {
-            res.status(200).send();
+            
           }
         })
       }

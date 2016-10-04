@@ -11,6 +11,7 @@ var Request = require("./models/request.model");
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}))
 app.use(cors());
+
 app.use("/api", expressJWT({secret: "qwerty1234"}));
 
 var userController = require("./controllers/user.controller");
@@ -18,18 +19,19 @@ var roommateController = require("./controllers/roommate.controller");
 var requestController = require("./controllers/request.controller");
 var sessionController = require("./controllers/session.controller");
 
-app.post("/user", userController.create); //DONE
-app.post("/api/user/search", userController.search); //DONE
-app.get("/api/user/:id", userController.show); //DONE
+app.post("/user", userController.create);
+app.post("/api/user/search", userController.search);
+app.get("/api/user/dashboard", userController.show);
+app.post("/api/user/update", userController.update);
 
-app.post("/api/roommate", roommateController.create); //DONE
-app.put("/api/roommate/:requesterId/update", roommateController.update); //DONE
-app.delete("/api/roommate/:requesterId/delete", roommateController.destroy); //DONE
-app.get("/api/user/roommate/requests", roommateController.index); //DONE
+app.post("/api/roommate", roommateController.create);
+app.put("/api/roommate/:requesterId/update", roommateController.update);
+app.delete("/api/roommate/:requesterId/delete", roommateController.destroy);
+app.get("/api/user/roommate/requests", roommateController.index);
 
-app.post("/api/request", requestController.create); //DONE
-app.put("/api/user/:roommateId/request/:id/update", requestController.update); //DONE
-app.delete("/api/user/:roommateId/request/:id/delete", requestController.destroy); //DONE
+app.post("/api/request", requestController.create);
+app.put("/api/user/:roommateId/request/:id/update", requestController.update);
+app.delete("/api/user/:roommateId/request/:id/delete", requestController.destroy);
 
 app.post("/session/new", sessionController.create);
 
