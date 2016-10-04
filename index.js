@@ -5,7 +5,8 @@ var port = process.env.PORT || 7000;
 var bodyParser = require("body-parser");
 var cors = require("cors");
 var expressJWT = require("express-jwt");
-var db = mongoose.connect('process.env.MONGOLAB_URI');
+var uri = process.env.MONGOLAB_URI || process.env.MONGOHQ_URL || 'mongodb://localhost/roomietrack'
+var db = mongoose.connect(uri);
 var User = require("./models/user.model");
 var Request = require("./models/request.model");
 app.use(bodyParser.json());

@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js"
+    "start": "nodemon index.js"
   },
   "repository": {
     "type": "git",
@@ -27,6 +27,7 @@
     "jsonwebtoken": "^7.1.9",
     "mongoose": "^4.6.2",
     "mongoose-unique-validator": "^1.0.2",
+    "nodemon": "^1.10.2",
     "validator": "^6.0.0"
   }
 }
