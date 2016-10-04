@@ -1,22 +1,23 @@
 {
-  "name": "roomtrack_api",
+  "name": "roomie_api",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/TylerRosenberg1/roomtrack_api.git"
+    "url": "git+https://github.com/TylerRosenberg1/roomie_api.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/TylerRosenberg1/roomtrack_api/issues"
+    "url": "https://github.com/TylerRosenberg1/roomie_api/issues"
   },
-  "homepage": "https://github.com/TylerRosenberg1/roomtrack_api#readme",
+  "homepage": "https://github.com/TylerRosenberg1/roomie_api#readme",
   "dependencies": {
     "bcrypt": "^0.8.7",
     "body-parser": "^1.15.2",
