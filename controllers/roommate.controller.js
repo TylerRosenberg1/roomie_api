@@ -1,9 +1,18 @@
 var User = require("../models/user.model");
 
 var roommateController = {
+  index: function(req, res) {
+    User.findOne({
+      _id: "57f2e637017c091a8de80445"
+    })
+    .populate("roommates._id")
+    .exec(function(err, user) {
+      res.json(user.roommates);
+    })
+  },
   create: function(req, res) {
-    User.findById("57f2b51c76e62e11244162d2", function(err, user1) {
-      User.findById("57f2b59c76e62e11244162d3", function(err, user2) {
+    User.findById("57f2e637017c091a8de80445", function(err, user1) {
+      User.findById(req.body.roommateId, function(err, user2) {
         User.update({
           _id: user1._id
         }, {$addToSet: {roommates: user2}}, function(err, res) {
@@ -16,7 +25,7 @@ var roommateController = {
               if (err) {
                 console.log(err);
               } else {
-                console.log(res);
+                res.status(200).send();
               }
             })
           }
@@ -26,18 +35,18 @@ var roommateController = {
   },
   update: function(req, res) {
     User.findOneAndUpdate({
-      _id: "57f19536ac8ebd0db6905243", "roommates._id": "57f19540ac8ebd0db6905244"
+      _id: "57f2e637017c091a8de80445", "roommates._id": req.params.requesterId
     }, {$set: {"roommates.$.status": "active"}}, function(err, res) {
       if (err) {
         console.log(err);
       } else {
         User.findOneAndUpdate({
-          _id: "57f19540ac8ebd0db6905244", "roommates._id": "57f19536ac8ebd0db6905243"
+          _id: req.params.requesterId, "roommates._id": "57f2e637017c091a8de80445"
         }, {$set: {"roommates.$.status": "active"}}, function(err, res) {
           if (err) {
             console.log(err);
           } else {
-            console.log("COMPLETE");
+            res.status(200).send();
           }
         })
       }
@@ -45,18 +54,18 @@ var roommateController = {
   },
   destroy: function(req, res) {
     User.findOneAndUpdate({
-      _id: "57f2b51c76e62e11244162d2"
-    }, {$pull: {roommates: {_id: "57f2b59c76e62e11244162d3"}}}, function(err, res) {
+      _id: "57f2e637017c091a8de80445"
+    }, {$pull: {roommates: {_id: req.params.requesterId}}}, function(err, res) {
       if (err) {
         console.log(err);
       } else {
         User.findOneAndUpdate({
-          _id: "57f2b59c76e62e11244162d3"
-        }, {$pull: {roommates: {_id: "57f2b51c76e62e11244162d2"}}}, function(err, res) {
+          _id: req.params.requesterId
+        }, {$pull: {roommates: {_id: "57f2e637017c091a8de80445"}}}, function(err, res) {
           if (err) {
             console.log(err);
           } else {
-            console.log("COMPLETE");
+            res.status(200).send();
           }
         })
       }

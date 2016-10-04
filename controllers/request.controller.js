@@ -13,7 +13,7 @@ var requestController = {
         if (err) {
           console.log(err);
         } else {
-          console.log("Woot");
+          res.status(200).send();
         }
       })
     })
@@ -37,7 +37,7 @@ var requestController = {
               if (err) {
                 console.log(err);
               } else {
-                console.log(resp);
+                res.status(200).send();
               }
             })
           }
@@ -58,7 +58,7 @@ var requestController = {
           if (err) {
             console.log(err);
           } else {
-            console.log("Fully Gone");
+            res.status(200).send();
           }
         })
       }

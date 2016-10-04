@@ -35,7 +35,7 @@ var userController = {
         console.log(err);
       } else {
         if (!user) {
-          res.status(200).send({error: "Oops...No such user found. Please try again :)"})
+          res.status(200).send({error: "No such user found. Please try again :)"})
         } else {
           res.json(user)
         }
